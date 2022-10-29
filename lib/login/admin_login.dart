@@ -9,10 +9,22 @@ class adminLoginpage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: _title,
-      home: Scaffold(
-        //appBar: AppBar(title: const Text(_title)),
-        body: const MyStatefulWidget(),
-      ),
+      home: AdminPage(),
+    );
+  }
+}
+
+class AdminPage extends StatefulWidget {
+  @override
+  _AdminPageState createState() => _AdminPageState();
+}
+
+class _AdminPageState extends State<AdminPage> {
+  static const String _title = 'Dhanvantri';
+
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      body: MyStatefulWidget(),
     );
   }
 }
@@ -75,6 +87,15 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 ),
               ),
             ),
+            Container(
+                height: 50,
+                padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                child: ElevatedButton(
+                  child: const Text('Login'),
+                  onPressed: () {
+                    // check login page
+                  },
+                )),
             TextButton(
               onPressed: () {
                 //forgot password screen
@@ -84,13 +105,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               ),
             ),
             Container(
-                height: 50,
                 padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                child: ElevatedButton(
-                  child: const Text('Login'),
-                  onPressed: () {
-                    // check login page
-                  },
+                child: const Center(
+                  child: Text('Admins have to be registered by the hospital.',
+                      style: TextStyle(
+                        fontSize: 10,
+                      )),
                 )),
           ],
         ));

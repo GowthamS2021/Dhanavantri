@@ -25,30 +25,9 @@ class _HomePageState extends State<HomePage> {
   static const String _title = 'Dhanvantri';
 
   Widget build(BuildContext context) {
-    // ignore: unnecessary_new
-    return new WillPopScope(
-        onWillPop: () {
-          // Navigator.pushReplacement(
-          //     context, new MaterialPageRoute(builder: (context) => HomePage()));
-          Navigator.pop(context);
-        },
-        child: Scaffold(
-          appBar: AppBar(
-            title: Text(_title),
-            automaticallyImplyLeading: true,
-            // leading: GestureDetector(
-            //   child: const Icon(
-            //     Icons.arrow_back_ios,
-            //     color: Colors.black,
-            //   ),
-            //   onTap: () {
-            //     Navigator.pop(context).pop();
-            //   },
-            // ),
-            backgroundColor: Color.fromARGB(0, 0, 0, 0),
-          ),
-          body: const MyStatefulWidget(),
-        ));
+    return const Scaffold(
+      body: MyStatefulWidget(),
+    );
   }
 }
 

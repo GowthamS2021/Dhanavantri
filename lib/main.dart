@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'login/client_login.dart';
 import 'login/admin_login.dart';
+import 'login/emergency.dart';
 
 void main() => runApp(const App());
 
@@ -64,7 +65,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               child: ElevatedButton(
                 child: const Text('Login as Admin'),
                 onPressed: () {
-                  runApp(adminLoginpage());
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => adminLoginpage(),
+                      ));
                 },
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(
@@ -85,7 +90,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 child: const Text('Login as User'),
                 onPressed: () {
                   // user login
-                  runApp(Loginpage());
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Loginpage(),
+                      ));
+                  // Loginpage();
                 },
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(
@@ -106,6 +116,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 child: const Text('Emergency'),
                 onPressed: () {
                   // emergency page
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Emergency(),
+                      ));
                 },
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(
