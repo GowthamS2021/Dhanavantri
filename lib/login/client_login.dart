@@ -1,3 +1,4 @@
+import 'package:dhanvantri/Client_HomePage/homepage.dart';
 import 'package:dhanvantri/login/client_signup.dart';
 import 'package:flutter/material.dart';
 import 'package:dhanvantri/login/forget.dart';
@@ -130,6 +131,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         child: ElevatedButton(
                           onPressed: () {
                             // check login page
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => HomeScreen(),
+                                ));
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Color.fromRGBO(237, 81, 133, 1),
