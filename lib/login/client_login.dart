@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../nave_bar.dart';
 
 void main() => runApp(const Loginpage());
 
@@ -99,12 +100,25 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             ),
             Container(
                 height: 50,
-                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                 child: ElevatedButton(
-                  child: const Text('Login'),
                   onPressed: () {
+                    NavBar();
                     // check login page
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => NavBar(),
+                        ));
                   },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color.fromRGBO(237, 81, 133, 1),
+                  ),
+                  child: const Center(
+                    child: Text(
+                      'Login',
+                    ),
+                  ),
                 )),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -115,9 +129,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                     'Sign in',
                     style: TextStyle(color: Color.fromARGB(255, 195, 59, 77)),
                   ),
-                  onPressed: () {
-                    //signup screen
-                  },
+                  onPressed: () {},
                 )
               ],
             ),

@@ -1,0 +1,15 @@
+import 'package:dhanvantri/widgets_of_nav/navigation_drawer_widget.dart';
+import 'package:flutter/material.dart';
+
+class PeoplePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) => Scaffold(
+        //drawer: NavigationDrawerWidget(),
+        appBar: AppBar(
+          title: Text('People'),
+          centerTitle: true,
+          backgroundColor: Colors.green,
+        ),
+        onDrawerChanged: (isOpened) => NavigationDrawerWidget(),
+      );
+}
