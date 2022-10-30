@@ -1,6 +1,6 @@
+import 'package:dhanvantri/login/client_signup.dart';
 import 'package:flutter/material.dart';
-
-void main() => runApp(const Loginpage());
+import 'package:dhanvantri/login/forget.dart';
 
 class Loginpage extends StatelessWidget {
   const Loginpage({Key? key}) : super(key: key);
@@ -41,6 +41,7 @@ class MyStatefulWidget extends StatefulWidget {
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -68,72 +69,100 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                     color: Color.fromARGB(255, 59, 166, 195),
                   ),
                 )),
-            Container(
-              padding: const EdgeInsets.all(10),
-              child: TextField(
-                controller: nameController,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'User Name',
-                ),
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-              child: TextField(
-                obscureText: true,
-                controller: passwordController,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Password',
-                ),
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                //forgot password screen
-              },
-              child: const Text(
-                'Forgot Password',
-              ),
-            ),
-            Container(
-                height: 50,
-                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                child: ElevatedButton(
-                  child: const Text('Login'),
-                  onPressed: () {
-                    // check login page
-                  },
-                )),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                const Text('Does not have account?'),
-                TextButton(
-                  child: const Text(
-                    'Sign in',
-                    style: TextStyle(color: Color.fromARGB(255, 195, 59, 77)),
-                  ),
-                  onPressed: () {
-                    //signup screen
-                  },
-                )
-              ],
-            ),
-            Container(
-                height: 50,
-                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                child: ElevatedButton(
-                  child: const Text('Emergency'),
-                  onPressed: () {
-                    // emergency page
-                  },
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                        Color.fromARGB(255, 195, 59, 107)),
-                  ),
-                )),
+            Form(
+              key: _formKey,
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Container(
+                      padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+                      child: TextFormField(
+                        controller: nameController,
+                        decoration: const InputDecoration(
+                          hintText: 'Enter your Name',
+                          labelText: 'User Name',
+                        ),
+                        validator: (String? value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter some text';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+                      child: TextFormField(
+                        controller: passwordController,
+                        obscureText: true,
+                        decoration: const InputDecoration(
+                          hintText: 'Password',
+                          labelText: 'Password',
+                        ),
+                        validator: (String? value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter some text';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+                      child: TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Forget(),
+                              ));
+                        },
+                        child: const Center(
+                          child: Text(
+                            'Forgot Password',
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                        height: 50,
+                        padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            // check login page
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Color.fromRGBO(237, 81, 133, 1),
+                          ),
+                          child: const Center(
+                            child: Text(
+                              'Login',
+                            ),
+                          ),
+                        )),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        const Text('Does not have account?'),
+                        TextButton(
+                          child: const Text(
+                            'Sign in',
+                            style: TextStyle(
+                                color: Color.fromARGB(255, 195, 59, 77)),
+                          ),
+                          onPressed: () {
+                            //signup screen
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => SignupPage(),
+                                ));
+                          },
+                        )
+                      ],
+                    ),
+                  ]),
+            )
           ],
         ));
   }

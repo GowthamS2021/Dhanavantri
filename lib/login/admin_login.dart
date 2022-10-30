@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'forget.dart';
 
 class adminLoginpage extends StatelessWidget {
   const adminLoginpage({Key? key}) : super(key: key);
@@ -39,6 +40,7 @@ class MyStatefulWidget extends StatefulWidget {
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  final GlobalKey<FormState> _formKey2 = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -66,52 +68,88 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                     color: Color.fromARGB(255, 59, 166, 195),
                   ),
                 )),
-            Container(
-              padding: const EdgeInsets.all(10),
-              child: TextField(
-                controller: nameController,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'User Name',
-                ),
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-              child: TextField(
-                obscureText: true,
-                controller: passwordController,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Password',
-                ),
-              ),
-            ),
-            Container(
-                height: 50,
-                padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-                child: ElevatedButton(
-                  child: const Text('Login'),
-                  onPressed: () {
-                    // check login page
-                  },
-                )),
-            TextButton(
-              onPressed: () {
-                //forgot password screen
-              },
-              child: const Text(
-                'Forgot Password',
-              ),
-            ),
-            Container(
-                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                child: const Center(
-                  child: Text('Admins have to be registered by the hospital.',
-                      style: TextStyle(
-                        fontSize: 10,
-                      )),
-                )),
+            Form(
+              key: _formKey2,
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Container(
+                      padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+                      child: TextFormField(
+                        controller: nameController,
+                        decoration: const InputDecoration(
+                          hintText: 'Enter your Name',
+                          labelText: 'User Name',
+                        ),
+                        validator: (String? value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter some text';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+                      child: TextFormField(
+                        controller: passwordController,
+                        obscureText: true,
+                        decoration: const InputDecoration(
+                          hintText: 'Password',
+                          labelText: 'Password',
+                        ),
+                        validator: (String? value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter some text';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+                      child: TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Forget(),
+                              ));
+                        },
+                        child: const Center(
+                          child: Text(
+                            'Forgot Password',
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                        height: 50,
+                        padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            // check login page
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Color.fromARGB(255, 124, 235, 163),
+                          ),
+                          child: const Center(
+                            child: Text(
+                              'Login',
+                            ),
+                          ),
+                        )),
+                    Container(
+                        padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
+                        child: const Center(
+                          child: Text(
+                              'Admins have to be registered by the hospital.',
+                              style: TextStyle(
+                                fontSize: 10,
+                              )),
+                        )),
+                  ]),
+            )
           ],
         ));
   }
