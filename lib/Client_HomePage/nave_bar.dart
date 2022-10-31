@@ -1,3 +1,4 @@
+import 'package:dhanvantri/client_HomePage/logBook.dart';
 import 'package:flutter/material.dart';
 
 class NavBar extends StatelessWidget {
@@ -9,8 +10,8 @@ class NavBar extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: [
           UserAccountsDrawerHeader(
-            accountName: Text('Oflutter.com'),
-            accountEmail: Text('example@gmail.com'),
+            accountName: const Text('Oflutter.com'),
+            accountEmail: const Text('example@gmail.com'),
             currentAccountPicture: CircleAvatar(
               child: ClipOval(
                 child: Image.network(
@@ -21,7 +22,7 @@ class NavBar extends StatelessWidget {
                 ),
               ),
             ),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.blue,
               image: DecorationImage(
                   fit: BoxFit.fill,
@@ -30,23 +31,33 @@ class NavBar extends StatelessWidget {
             ),
           ),
           ListTile(
-            leading: Icon(Icons.favorite),
-            title: Text('Favorites'),
-            onTap: () => null,
-          ),
+              leading: Icon(Icons.book),
+              title: Text('Medical Book'),
+              onTap: () {
+                // emergency page
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => log_book(),
+                    ));
+              }),
           ListTile(
             leading: Icon(Icons.person),
-            title: Text('Friends'),
+            title: Text('Doctor\'s Availability'),
             onTap: () => null,
           ),
           ListTile(
-            leading: Icon(Icons.share),
-            title: Text('Share'),
+            leading: Icon(Icons.file_present),
+            title: Text('Reports'),
             onTap: () => null,
           ),
           ListTile(
-            leading: Icon(Icons.notifications),
-            title: Text('Request'),
+            leading: Icon(Icons.contact_mail),
+            title: Text('Send Pink slip'),
+          ),
+          ListTile(
+            leading: Icon(Icons.new_label),
+            title: Text('Lab Order'),
           ),
           Divider(),
           ListTile(
@@ -61,9 +72,9 @@ class NavBar extends StatelessWidget {
           ),
           Divider(),
           ListTile(
-            title: Text('Exit'),
+            title: Text('Log Out'),
             leading: Icon(Icons.exit_to_app),
-            onTap: () => null,
+            onTap: () => {Navigator.pop(context)},
           ),
         ],
       ),
