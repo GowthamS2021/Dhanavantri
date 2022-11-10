@@ -1,3 +1,6 @@
+import 'package:dhanvantri/admin_HomePage/homepage.dart';
+import 'package:dhanvantri/backend/auth.dart';
+import 'package:dhanvantri/login/client_login.dart';
 import 'package:flutter/material.dart';
 import 'forget.dart';
 
@@ -38,9 +41,10 @@ class MyStatefulWidget extends StatefulWidget {
 }
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-  TextEditingController nameController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  String email = '';
+  String password = '';
   final GlobalKey<FormState> _formKey2 = GlobalKey<FormState>();
+  final AuthService _auth = AuthService();
 
   @override
   Widget build(BuildContext context) {
@@ -76,34 +80,37 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                     Container(
                       padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
                       child: TextFormField(
-                        controller: nameController,
                         decoration: const InputDecoration(
-                          hintText: 'Enter your Name',
-                          labelText: 'User Name',
+                          hintText: 'Email',
+                          labelText: 'Registered Email',
                         ),
                         validator: (String? value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please enter some text';
+                            return 'Please enter Email';
                           }
                           return null;
                         },
+                        onChanged: (value) => {setState(() => email = value)},
                       ),
                     ),
                     Container(
                       padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
                       child: TextFormField(
-                        controller: passwordController,
                         obscureText: true,
                         decoration: const InputDecoration(
                           hintText: 'Password',
                           labelText: 'Password',
                         ),
                         validator: (String? value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter some text';
+                          if (value == null ||
+                              value.isEmpty ||
+                              value.length < 6) {
+                            return 'Please enter Password';
                           }
                           return null;
                         },
+                        onChanged: (value) =>
+                            {setState(() => password = value)},
                       ),
                     ),
                     Container(
@@ -127,8 +134,37 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         height: 50,
                         padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                         child: ElevatedButton(
-                          onPressed: () {
+                          onPressed: () async {
                             // check login page
+                            if (_formKey2.currentState!.validate()) {
+                              dynamic result =
+                                  await _auth.adminsignInWithEmailAndPassword(
+                                      email, password);
+                              if (result == null) {
+                                showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        title: Text("Login failed"),
+                                        content: const Text(
+                                            "Taking back to Login page"),
+                                        actions: [
+                                          TextButton(
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                              },
+                                              child: Text("Ok")),
+                                        ],
+                                      );
+                                    });
+                              } else {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => homePage(),
+                                    ));
+                              }
+                            }
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Color.fromARGB(255, 124, 235, 163),

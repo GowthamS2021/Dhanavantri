@@ -1,23 +1,49 @@
+import 'package:dhanvantri/Models/User.dart';
+import 'package:dhanvantri/client_HomePage/HomePage.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'backend/auth.dart';
 import 'login/client_login.dart';
 import 'login/admin_login.dart';
 import 'login/emergency.dart';
 
-void main() => runApp(const App());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(const App());
+}
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
 
-  static const String _title = 'Dhanvantri';
-
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: _title,
-      home: Scaffold(
-        body: MyStatefulWidget(),
-      ),
-    );
+    return StreamProvider<ClientUserdetails?>.value(
+        value: AuthService().user, initialData: null, child: Wrapper());
+  }
+}
+
+class Wrapper extends StatelessWidget {
+  static const String _title = 'Dhanvantri';
+  @override
+  Widget build(BuildContext context) {
+    dynamic user = Provider.of<ClientUserdetails?>(context);
+    if (user == null) {
+      return const MaterialApp(
+        title: _title,
+        home: Scaffold(
+          body: MyStatefulWidget(),
+        ),
+      );
+    } else {
+      return MaterialApp(
+        title: _title,
+        home: Scaffold(
+          body: HomeScreen(),
+        ),
+      );
+    }
   }
 }
 
@@ -35,21 +61,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         padding: const EdgeInsets.all(10),
         child: ListView(children: <Widget>[
           Container(
-              alignment: Alignment.center,
-              padding: const EdgeInsets.all(10),
-              margin: const EdgeInsets.symmetric(vertical: 20),
-              child: const Text(
-                'Dhanvantri',
-                style: TextStyle(
-                    color: Color.fromARGB(255, 195, 59, 75),
-                    fontWeight: FontWeight.w500,
-                    fontSize: 30),
-              )),
-          Container(
             alignment: Alignment.center,
             padding: const EdgeInsets.all(10),
             margin: const EdgeInsets.symmetric(vertical: 10),
-            child: Image.asset('assets/images/logo.webp',
+            child: Image.asset('assets/images/logo.jpeg',
                 width: 250, height: 250, fit: BoxFit.fill),
           ),
           Container(

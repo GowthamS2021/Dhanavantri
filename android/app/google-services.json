@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "102678892104",
+    "project_id": "dhanvantri-gowthams2021",
+    "storage_bucket": "dhanvantri-gowthams2021.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:102678892104:android:9f00619fb8cdabb014527d",
+        "android_client_info": {
+          "package_name": "com.GowthamS2021.dhanvantri"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "102678892104-u74qhdj47qqgg2st7uuek7c1cs32f3t6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArp2Ys06qM01lOJVUcoZ07f6TBH4LwbpA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "102678892104-u74qhdj47qqgg2st7uuek7c1cs32f3t6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
